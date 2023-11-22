@@ -56,7 +56,7 @@
 <main class="ttr-wrapper">
 
 	@yield('content')
-	</main>
+</main>
 
 <!-- External JavaScripts -->
 <script src="{{ asset('frontend/assets/js/jquery.min.js') }}"></script>
