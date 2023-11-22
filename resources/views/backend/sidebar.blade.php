@@ -22,7 +22,7 @@
 		                </a>
 		            </li>
 					<li>
-						<a href="courses.html" class="ttr-material-button">
+						<a href="{{('/kategori')}}" class="ttr-material-button">
 							<span class="ttr-icon"><i class="ti-layout-accordion-list"></i></span>
 		                	<span class="ttr-label">Kategori</span>
 		                </a>
@@ -41,10 +41,13 @@
 		                </a>
 		                <ul>
 		                	<li>
-		                		<a href="#" class="ttr-material-button"><span class="ttr-label">Mentor</span></a>
+		                		<a href="{{ url( '/data_mentor' )}}" class="ttr-material-button"><span class="ttr-label">Mentor</span></a>
 		                	</li>
 		                	<li>
-		                		<a href="#" class="ttr-material-button"><span class="ttr-label">Peserta</span></a>
+		                		<a href="{{ url( '/peserta' )}}" class="ttr-material-button"><span class="ttr-label">Peserta</span></a>
+		                	</li>
+							<li>
+		                		<a href="{{ url( '/user' )}}" class="ttr-material-button"><span class="ttr-label">User</span></a>
 		                	</li>
 						</ul>
 		            </li>

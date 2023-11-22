@@ -64,13 +64,9 @@
 	
 </head>
 <body class="ttr-opened-sidebar ttr-pinned-sidebar">
-	
-	<!-- header start -->
-	@include('backend.header')
-	<!-- header end -->
-	<!-- Left sidebar menu start -->
-	@include('backend.sidebar')
-	<!-- Left sidebar menu end -->
+  @include('sweetalert::alert')
+  @include('backend.header')
+  @include('backend.sidebar')
 	<!--Main section start -->
 	<main class="ttr-wrapper">
   @if ($message = Session::get('success'))
@@ -184,27 +180,6 @@
     });
 
   });
-
-  $('.show-alert-destroy-box').click(function (event) {
-            var form = $(this).closest("form");
-            var name = $(this).data("name");
-            event.preventDefault();
-            swal({
-                title: "Apakah ada yakin ingin menghapus data ini?",
-                text: "Data yang di hapus akan hilang selamanya.",
-                icon: "warning",
-                type: "warning",
-                buttons: ["Batal", "YA"],
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                }
-            });
-        });
-
 </script>
  <!-- Vendor JS Files -->
   <script src="{{ asset('backend/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
@@ -218,7 +193,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('backend/assets/js/main.js') }}"></script>
-  
+
 </body>
 <!-- Mirrored from educhamp.themetrades.com/demo/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Feb 2019 13:09:05 GMT -->
 </html>

@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB; // jika pakai query builder
 use Illuminate\Database\Eloquent\Model; //jika pakai eloquent
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use PDF;
+use App\Exports\MentorExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MentorController extends Controller
 {
@@ -215,5 +218,16 @@ class MentorController extends Controller
         Mentor::where('id',$id)->delete();
         return redirect()->route('data_mentor.index')->with('success','Data mentor Berhasil Dihapus');
 
+    }
+
+    public function mentorPDF(){
+        $ar_mentor = Mentor::all();
+        $pdf = PDF::loadView('backend.mentor.mentorPDF', ['ar_mentor'=>$ar_mentor]);
+        return $pdf->download('data_mentor_'.date('d-m-Y_H:i:s').'.pdf');
+    }
+
+    public function mentorExcel() 
+    {
+        return Excel::download(new MentorExport, 'data_mentor_'.date('d-m-Y_H:i:s').'.xlsx');
     }
 }

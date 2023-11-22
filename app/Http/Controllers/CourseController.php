@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model; //jika pakai eloquent
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use PDF;
+use App\Exports\CourseExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CourseController extends Controller
 {
@@ -213,25 +215,16 @@ class CourseController extends Controller
         return redirect()->route('data_course.index')->with('success','Data course Berhasil Dihapus');
 
     }
-
-    public function generatePDF()
-    {
-        $data = [
-            'title' => 'Welcome to Learning Journey',
-            'date' => date('d-m-y H:i:s')
-        ];
-          
-        $pdf = PDF::loadView('backend.course.pdf', $data);
-    
-        return $pdf->download('data_pdf_'.date('d-m-y_H:i:s').'.pdf');
-    }
    
-    public function coursePDF()
+    public function coursePDF(){
+        $ar_course = Course::all();
+        $pdf = PDF::loadView('backend.course.coursePDF', ['ar_course'=>$ar_course]);
+        return $pdf->download('data_course_'.date('d-m-Y_H:i:s').'.pdf');
+    }
+
+    public function courseExcel() 
     {
-      $ar_course = Course::all();
-      $pdf = PDF::loadView('backend.course.coursePDF', 
-                            ['ar_course'=> $ar_course]);
-      return $pdf->download('data_course_'.date('d-m-y_H:i:s').'.pdf');
+        return Excel::download(new CourseExport, 'data_course_'.date('d-m-Y_H:i:s').'.xlsx');
     }
 
 }   

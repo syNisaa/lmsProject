@@ -115,13 +115,19 @@
 						</div>
 					</li>
 					<li>
-						<a href="#" class="ttr-material-button ttr-submenu-toggle"><span class="ttr-user-avatar"><img alt="" src="{{ asset('admin/assets/img/testimonials/pic3.jpg') }}" width="32" height="32"></span></a>
+						<a href="#" class="ttr-material-button ttr-submenu-toggle"><span class="ttr-user-avatar"><img alt="" src="{{ asset('admin/assets/img/testimonials/pic3.jpg') }}" width="32" height="32">{{ Auth::user()->name }}</span></a>
 						<div class="ttr-header-submenu">
 							<ul>
 								<li><a href="user-profile.html">My profile</a></li>
 								<li><a href="list-view-calendar.html">Activity</a></li>
 								<li><a href="mailbox.html">Messages</a></li>
-								<li><a href="../login.html">Logout</a></li>
+								<li><a href="{{ route('logout') }}"onclick="event.preventDefault();
+								document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
+								<form id="logout-form" action="{{ route('logout') }}" 
+								method="POST" style="display: none;">
+								@csrf
+								</form>
+
 							</ul>
 						</div>
 					</li>

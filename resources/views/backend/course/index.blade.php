@@ -5,11 +5,14 @@ $ar_judul = ['No','Nama','deskripsi','Level','kategori','Mentor','Foto','Action'
 $no = 1;
 @endphp
 <h3>Daftar course</h3>
-<a href="{{ route('course.create')}}" class="btn btn-primary btn-sm" title="Tambah Data">
-    <i class="bi bi-clipboard-plus"></i> Tambah
+<a href="{{ route('course.create')}}" class="btn btn-primary" title="Tambah Data">
+    <i class="bi bi-clipboard-plus"></i>
 </a>
-<a href="{{ route('course.pdf')}}" class="btn btn-danger btn-sm" title="Export To PDF">
+<a href="{{ route('course.pdf')}}" class="btn btn-danger" title="Export To PDF">
     <i class="bi bi-filetype-pdf"></i>
+</a>
+<a href="{{ route('course.excel') }}" class="btn btn-success " title="Export to Excel">
+	<i class="bi bi-file-earmark-excel"></i>
 </a>
 <br/><br/>
 <table class="table datatable">
@@ -43,7 +46,8 @@ $no = 1;
                     <a class="btn btn-warning btn-sm" href="{{ route('course.edit', $a->id)}}" title="Ubah Course">
                         <i class="bi bi-pencil-fill"></i>
                     </a>
-					<button type="submit" class="btn btn-danger btn-sm show-alert-destroy-box " title="Hapus Course">
+					<button type="submit" title="Hapus Asset" class="btn btn-danger btn-sm"
+						name="proses" value="hapus" onclick="return confirm('Anda Yakin diHapus?')">
 						<i class="bi bi-trash"></i>
 					</button>
 					</form>

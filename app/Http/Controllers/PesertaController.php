@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use PDF;
+use App\Exports\PesertaExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PesertaController extends Controller
 {
@@ -205,5 +208,16 @@ class PesertaController extends Controller
         return redirect()->route('peserta.index')
                          ->with('success','Data peserta Berhasil Dihapus');
 
+    }
+
+    public function pesertaPDF(){
+        $ar_peserta = Peserta::all();
+        $pdf = PDF::loadView('backend.peserta.pesertaPDF', ['ar_peserta'=>$ar_peserta]);
+        return $pdf->download('data_peserta_'.date('d-m-Y_H:i:s').'.pdf');
+    }
+
+    public function pesertaExcel() 
+    {
+        return Excel::download(new PesertaExport, 'data_peserta_'.date('d-m-Y_H:i:s').'.xlsx');
     }
 }

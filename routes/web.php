@@ -64,15 +64,30 @@ Route::get('/mentor', function () {
 });
 
 
-// ------------- BACKEND ---------------------
-Route::resource('/course', CourseController::class);
-Route::resource('/mentor', MentorController::class);
-Route::resource('/data_mentor', MentorController::class);
-Route::resource('/data_course', CourseController::class);
-Route::resource('/event', EventController::class);
-Route::resource('/quiz', QuizController::class);
-Route::resource('/peserta', PesertaController::class);
-Route::resource('/kategori', KategoriController::class);
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/generate-pdf', [CourseController::class, 'generatePDF']);
-Route::get('/course-pdf', [CourseController::class, 'coursePDF'])->name('course.pdf');
+//------------------------------------------halaman backend--------------------------------------------
+Route::get('/Administrator', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+
+Route::resource('/course', CourseController::class)->middleware('auth');
+Route::resource('/data_course', CourseController::class)->middleware('auth');
+Route::get('/course-pdf', [CourseController::class, 'coursePDF'])->name('course.pdf')->middleware('auth');
+Route::get('/course-excel', [CourseController::class, 'courseExcel'])->name('course.excel')->middleware('auth');
+
+Route::resource('/mentor', MentorController::class)->middleware('auth');
+Route::resource('/data_mentor', MentorController::class)->middleware('auth');
+Route::get('/mentor-pdf', [MentorController::class, 'mentorPDF'])->name('mentor.pdf')->middleware('auth');
+Route::get('/mentor-excel', [MentorController::class, 'mentorExcel'])->name('mentor.excel')->middleware('auth');
+
+Route::resource('/peserta', PesertaController::class)->middleware('auth');
+Route::get('/peserta-pdf', [PesertaController::class, 'pesertaPDF'])->name('peserta.pdf')->middleware('auth');
+Route::get('/peserta-excel', [PesertaController::class, 'pesertaExcel'])->name('peserta.excel')->middleware('auth');
+
+Route::resource('/user', UserController::class)->middleware('auth');
+
+Route::resource('/kategori', KategoriController::class)->middleware('auth');
+Route::resource('/event', EventController::class)->middleware('auth');
+Route::resource('/quiz', QuizController::class)->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
