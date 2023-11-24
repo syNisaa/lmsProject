@@ -29,7 +29,7 @@ Route::get('/admin', [DashboardController::class, 'index']);
 
 // Frontend 
 Route::get('/', function () {
-    return view('frontend.home');
+    return view('frontend.index');
 });
 
 Route::get('/login', function () {

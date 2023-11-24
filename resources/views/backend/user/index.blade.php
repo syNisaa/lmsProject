@@ -1,7 +1,7 @@
 @extends('backend.index')
 @section('content')
 @php
-$ar_judul = ['No','Nama','Email','Password','Action'];
+$ar_judul = ['No','Nama','Email','Role','Status','Foto','Action'];
 $no = 1;
 @endphp
 <h3>Daftar user</h3>
@@ -21,9 +21,11 @@ $no = 1;
 		@foreach($ar_user as $u)
 			<tr>
 				<td>{{ $no++ }}</td>
-				<td>{{ $u->nama }}</td>
+				<td>{{ $u->name }}</td>
 				<td>{{ $u->email }}</td>
-				<td>{{ $u->password }}</td>
+				<td>{{ $u->role }}</td>
+				<td>{{ $u->isactive }}</td>
+				<td>{{ $u->foto }}</td>
 			    <td>
 					<form method="POST" action="{{ route('user.destroy', $u->id) }}">
 					@csrf 
